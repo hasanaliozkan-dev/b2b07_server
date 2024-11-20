@@ -1,11 +1,12 @@
-from flask import Flask, request, redirect, url_for, render_template_string
+from flask import Flask, request, render_template_string
 import os
 import werkzeug.utils
+import sys
 
 app = Flask(__name__)
 
-UPLOAD_FOLDER = 'uploads'
-ALLOWED_EXTENSIONS = {'py', 'zip'}  
+UPLOAD_FOLDER = sys.argv[1] if len(sys.argv) > 1 else 'uploads'
+ALLOWED_EXTENSIONS = sys.argv[2].split(',') if len(sys.argv) > 2 else {'zip','py'}
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 uploaded_ips = {}
@@ -167,6 +168,7 @@ upload_form_template = """
                                 <div id="drop-area" class="file-upload" ondrop="dropFile(event)" ondragover="allowDrop(event)" onclick="triggerFileInput()">
                                     <i class="fas fa-cloud-upload-alt"></i>
                                     <p>Drag and drop files here, or click to select</p>
+                                    <em><span>Allowed file types: """ + ', '.join("." + ext for ext in ALLOWED_EXTENSIONS) + """</span></em>
                                     <input type="file" name="files" id="fileInput" style="display: none;" onchange="handleFileSelect(event)" multiple>
                                 </div>
                                 <div id="fileList" class="file-list"></div>
