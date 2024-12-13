@@ -60,8 +60,14 @@ upload_form_template = """
                             <meta charset="UTF-8">
                             <meta name="viewport" content="width=device-width, initial-scale=1.0">
                             <title>Upload Files</title>
-                            <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+                            
                             <style>
+                                @font-face {
+                                    font-family: 'Font Awesome 6 Free';
+                                    font-style: normal;
+                                    font-weight: 900;
+                                    src: url('fa-solid-900.woff2') format('woff2');
+                                }
                                 /* General styling */
                                 body {
                                     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
